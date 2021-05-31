@@ -1,1 +1,99 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <iomanip>
+#include <cstring>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
 
+//This is to declare appropriate functions while some are returning value.
+
+void credits(string &);
+void menu(string, int &, int &, double &);
+void getStats(ofstream &, ifstream &, string &, int &, int &, double &);
+void getUserName(string &);
+void validateResponse(string &);
+int validateAnswer(string);
+int checkAnswer(int, int);
+void updateStats(int, int &, int &, double&);
+void displayStats(string, int, int, double);
+void saveStats(ofstream &, string, int, int, double);
+int genAdd();
+int genSub();
+int genMulti();
+int genDiv();
+
+int main(){
+    
+    ofstream outputFile;
+    ifstream inputFile;
+    int right = 0, wrong = 0;
+    double* wins = 0;
+    string name, play = "y";
+
+    //srand() is used to create random number every moment.
+    unsigned seed = time(0);
+    srand(seed);
+
+    wins = new double;
+    *wins = 0.00;
+
+    delete wins;
+
+  /*The do will execute the the body even if the condition is false*/
+do
+{
+    credits(play);
+if (play == "y" || play == "Y")
+{
+    getStats(outputFile, inputFile, name, right, wrong, *wins);
+
+    menu(name, right, wrong, *wins);
+
+    saveStats(outputFile, name, right, wrong, *wins);
+
+    /*Here you can reset the stats for the next player*/
+   
+    right = 0;
+    wrong = 0;
+    *wins = 0.00;
+
+        }
+    } while (play == "y" || play == "Y");
+    return 0;
+}
+
+void credits(string &play)
+{
+    cout << "\n**************************************" << endl;
+    cout << "         Press y or Y to play.        " << endl;
+    cout << "         Press any key to exit.       " << endl;
+    cout << "\n**************************************" << endl;
+    
+    getline(cin, play);
+}
+
+//Retrieve user data function.
+void getStats(ofstream &outputFile, ifstream &inputFile, string &name, int &correct, int &wrong, double & wins)
+{
+    string userName;
+    getUserName(userName);
+    name = userName;
+    userName += ".txt";
+    
+    inputFile.open(userName.c_str());
+    //If the inputfile with the user name does not exist, the program will proceed to the game WITHOUT retrieving the user data file.
+    if (inputFile.is_open())
+    {
+        inputFile >> name;
+        inputFile >> correct;
+        inputFile >> wrong;
+        inputFile >> wins;
+        inputFile.close();
+       
+        system("cls");
+        
+        cout <<"************* Welcome back, " << left << setw(10) << name <<"!************" <<endl;
+      
+        }else{
