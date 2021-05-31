@@ -296,3 +296,101 @@ void updateStats(int rightOrWrong, int &correct, int &wrong, double &wins){
 }
 }    
 //This is a function that displays the user's current status. 
+
+void displayStats(string name, int correct, int wrong, double wins){
+
+    cout << "***************Progress**************\n" << endl;
+    cout << "   Name:                  " << left << setw(10) << name << " " <<endl;
+    cout << "   Total correct answer:  " << left << setw(3) << correct << "     " << endl;
+    cout << "   Total wrong answer:    " << left << setw(3) << wrong << "       " << endl;
+    cout << "   Total wins:           $" << left << setw(6) << fixed << showpoint << setprecision(2) << wins << "    :" << endl;
+    cout << "*************************************\n" << endl;
+
+    system("pause");
+}
+
+//Function that saves the current progress to text file when exiting. 
+void saveStats(ofstream &outputFile, string name, int correct, int wrong, double wins){
+    string userName;
+    userName = name + ".txt";
+    outputFile.open(userName.c_str());
+    
+    outputFile << name << endl;
+    outputFile << correct << endl;
+    outputFile << wrong << endl;
+    outputFile << fixed << showpoint << setprecision(2) << wins << endl;
+    
+    outputFile.close();
+}
+//Function that generates the addition problems.
+int genAdd(){
+    system("cls");
+    
+    int num1, num2, correctAnswer;
+    //Create 2 random numbers ranging from 1 to 10.
+    num1 = (rand() % 10) + 1;
+    num2 = (rand() % 10) + 1;
+    
+    correctAnswer = num1 + num2;
+    //Display the problem.
+
+    cout << "************Welcome to addition*****************" << endl;
+    cout << "             " << setw(2) << num1 << " + " << setw(2) << num2 << " = ?             " << endl;
+    
+    return correctAnswer;
+}
+
+//Function that generate subtraction problem.
+int genSub(){
+    system("cls");
+
+    int num1, num2, correctAnswer; 
+    //num2 ranges from 1 to num1 because we need num2 to be less than num1.
+    num1 = (rand() % 10) + 1;
+    num2 = (rand() % num1) + 1;
+    
+    correctAnswer = num1 - num2;
+
+    cout << "***************Welcome to subtraction***************" << endl;
+    cout << "             " << setw(2) << num1 << " - " << setw(2) << num2 << " = ?             " << endl;
+    
+    return correctAnswer;
+    }
+
+    //Function that generate multiplication problem.
+    int genMulti(){
+        system("cls");
+        
+        int num1, num2, correctAnswer;
+        
+        num1 = (rand() % 10) + 1;
+        num2 = (rand() % 10) + 1;
+        
+        correctAnswer = num1 * num2;
+        
+
+        cout << "***************Welcome to muliplication***************" << endl;
+        cout << "             " << setw(2) << num1 << " x " << setw(2) << num2 << " = ?             " << endl;
+        
+        return correctAnswer;
+    }
+
+    //Function that generate division problem.
+    int genDiv(){
+        system("cls");
+        
+        int num1, num2, correctAnswer;
+        //num2 generates a number that ranges from 1 to 10 and it is multiplied by num1. 
+        //the former number of num2 before multiplying, that value will be the correct answer.
+        num1 = (rand() % 10) + 1;
+        num2 = ((rand() % 10) + 1) * num1;
+
+        //set the correct answer.x
+
+        correctAnswer = num2 / num1;
+        
+        cout << "***************Welcome to division***************" << endl;
+        cout << "             " << setw(2) << num2 << " / " << setw(2) << num1 << " = ?             " << endl;
+        
+        return correctAnswer;
+        }
