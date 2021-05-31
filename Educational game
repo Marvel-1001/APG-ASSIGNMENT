@@ -97,3 +97,103 @@ void getStats(ofstream &outputFile, ifstream &inputFile, string &name, int &corr
         cout <<"************* Welcome back, " << left << setw(10) << name <<"!************" <<endl;
       
         }else{
+
+            system("cls");
+            
+        cout <<"************Hello, "<< name << "! Let's play!**********\n" << endl;
+    
+            }
+        }
+
+        //menu function.
+        void menu(string name, int &correct, int &wrong, double &wins)
+        {
+            
+            string makeChoice, answer;
+            int correctAnswer, answerNumber, rightOrWrong = 0;
+            
+            do{
+                cout << "*****************Game Menu********************\n" << endl;
+                cout << "     [1] Addition                      " << endl;      
+                cout << "     [2] Subtraction                   " << endl;
+                cout << "     [3] Multiplication                " << endl;
+                cout << "     [4] Division                      " << endl;
+                cout << "     [5] Current statistic             " << endl;
+                cout << "     [X] Save and return to home\n     " << endl;
+                cout << "***************************************" << endl;
+
+                getline(cin, makeChoice);
+                
+                validateResponse(makeChoice);
+                //After validating, depending on the selection, the program will run the selected option.
+                // choice 1 is Addition.
+                if (makeChoice == "1"){
+                    for (int i = 0; i < 3; i++)
+                    {
+                    //Set the correct answer to the returned value from the gen Addition function. 
+                    correctAnswer = genAdd();
+                    //Asks the user to type in the user's answer.
+                    getline(cin, answer);
+                    //Validate the user's answer
+                    answerNumber = validateAnswer(answer);
+                    //rightOrWrong variable will determine whether the user's answer is correct or incorrect.
+                    rightOrWrong = checkAnswer(correctAnswer, answerNumber);
+                    //Calling updateStats function.
+                    updateStats(rightOrWrong, correct, wrong, wins);
+                    }
+                    
+
+                    }
+                    //Subtraction.
+                    else if (makeChoice == "2"){
+                        for (size_t i = 0; i < 3; i++)
+                        {
+                        correctAnswer = genSub();
+                        getline(cin, answer);
+                        answerNumber = validateAnswer(answer);
+                        rightOrWrong = checkAnswer(correctAnswer, answerNumber);
+                        updateStats(rightOrWrong, correct, wrong, wins);
+                        
+                        }
+                        
+                        
+                        }//Multiplication.
+                        else if (makeChoice == "3"){
+                      for (size_t i = 0; i < 3; i++)
+                      {
+                        correctAnswer = genMulti();
+                        getline(cin, answer);
+                        answerNumber = validateAnswer(answer);
+                        rightOrWrong = checkAnswer(correctAnswer, answerNumber);
+                        updateStats(rightOrWrong, correct, wrong, wins);
+                        
+                      }
+                      
+                        }//Division.
+                        else if (makeChoice == "4"){
+                          for (size_t i = 0; i < 3; i++)
+                          {
+                            correctAnswer = genDiv();
+                            getline(cin, answer);
+                            answerNumber = validateAnswer(answer);
+                            rightOrWrong = checkAnswer(correctAnswer, answerNumber);
+                            updateStats(rightOrWrong, correct, wrong, wins);
+                          }
+                          
+                            
+                            }
+                            //Displaying the statistic of user's current progress.
+                            else if (makeChoice == "5"){
+                                //clears the screen, and call the displayStats function.
+                                system("cls");
+                                displayStats(name, correct, wrong, wins);
+
+                                system("cls");
+                                cout << "***************************************" << endl;
+                               
+                                }//Returning to the home screen.
+                                else{
+                                    system("cls");
+                                }
+                                } while (!(makeChoice == "x" || makeChoice == "X")); 
+                            }
