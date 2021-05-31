@@ -7,8 +7,6 @@
 #include <ctime>
 using namespace std;
 
-//This is to declare appropriate functions while some are returning value.
-
 void credits(string &);
 void menu(string, int &, int &, double &);
 void getStats(ofstream &, ifstream &, string &, int &, int &, double &);
@@ -41,7 +39,7 @@ int main(){
 
     delete wins;
 
-  /*The do will execute the the body even if the condition is false*/
+  //The do executes the the body even if the condition is false
 do
 {
     credits(play);
@@ -53,21 +51,21 @@ if (play == "y" || play == "Y")
 
     saveStats(outputFile, name, right, wrong, *wins);
 
-    /*Here you can reset the stats for the next player*/
+    //Reset the stats of the next player
    
     right = 0;
     wrong = 0;
     *wins = 0.00;
 
         }
-    } while (play == "y" || play == "Y");
+    } while (play == "M" || play == "m");
     return 0;
 }
 
 void credits(string &play)
 {
     cout << "\n**************************************" << endl;
-    cout << "         Press y or Y to play.        " << endl;
+    cout << "         Press M or m to play.        " << endl;
     cout << "         Press any key to exit.       " << endl;
     cout << "\n**************************************" << endl;
     
@@ -83,7 +81,7 @@ void getStats(ofstream &outputFile, ifstream &inputFile, string &name, int &corr
     userName += ".txt";
     
     inputFile.open(userName.c_str());
-    //If the inputfile with the user name does not exist, the program will proceed to the game WITHOUT retrieving the user data file.
+    //If the inputfile with the user name does not exist, the program will proceed to the game with out retrieving the user data file.
     if (inputFile.is_open())
     {
         inputFile >> name;
@@ -125,26 +123,23 @@ void getStats(ofstream &outputFile, ifstream &inputFile, string &name, int &corr
                 getline(cin, makeChoice);
                 
                 validateResponse(makeChoice);
-                //After validating, depending on the selection, the program will run the selected option.
                 // choice 1 is Addition.
                 if (makeChoice == "1"){
                     for (int i = 0; i < 3; i++)
                     {
                     //Set the correct answer to the returned value from the gen Addition function. 
                     correctAnswer = genAdd();
-                    //Asks the user to type in the user's answer.
                     getline(cin, answer);
-                    //Validate the user's answer
                     answerNumber = validateAnswer(answer);
-                    //rightOrWrong variable will determine whether the user's answer is correct or incorrect.
+                    //rightOrWrong variable determines whether the user's answer is correct or not.
                     rightOrWrong = checkAnswer(correctAnswer, answerNumber);
-                    //Calling updateStats function.
+                    //Calls updateStats function.
                     updateStats(rightOrWrong, correct, wrong, wins);
                     }
                     
 
                     }
-                    //Subtraction.
+                    //Choice 2 is subtraction
                     else if (makeChoice == "2"){
                         for (size_t i = 0; i < 3; i++)
                         {
@@ -157,7 +152,7 @@ void getStats(ofstream &outputFile, ifstream &inputFile, string &name, int &corr
                         }
                         
                         
-                        }//Multiplication.
+                        }//Choice 3 is multiplication.
                         else if (makeChoice == "3"){
                       for (size_t i = 0; i < 3; i++)
                       {
@@ -169,7 +164,7 @@ void getStats(ofstream &outputFile, ifstream &inputFile, string &name, int &corr
                         
                       }
                       
-                        }//Division.
+                        }//choice 4 is division.
                         else if (makeChoice == "4"){
                           for (size_t i = 0; i < 3; i++)
                           {
@@ -182,7 +177,7 @@ void getStats(ofstream &outputFile, ifstream &inputFile, string &name, int &corr
                           
                             
                             }
-                            //Displaying the statistic of user's current progress.
+                            //Displays user's current progress  statistics.
                             else if (makeChoice == "5"){
                                 //clears the screen, and call the displayStats function.
                                 system("cls");
@@ -197,6 +192,7 @@ void getStats(ofstream &outputFile, ifstream &inputFile, string &name, int &corr
                                 }
                                 } while (!(makeChoice == "x" || makeChoice == "X")); 
                             }
+                            
 //Function that gets the user name.
                         void getUserName(string &userName){
                             //Clears screen to allow room to ask the user for his/her name.
@@ -215,7 +211,7 @@ void validateResponse(string &makeChoice){
         system("cls");
 
 
-cout << "***Please enter your choice. i.e(1-4)****" << endl;
+cout << "***   Please enter your choice.    ****" << endl;
 cout << "**************Game Menu**************\n" << endl;
 cout << "     [1] Addition                      " << endl;      
 cout << "     [2] Subtraction                   " << endl;
@@ -232,11 +228,11 @@ getline(cin, makeChoice);
     int validateAnswer(string answer){
     int Length, answerNumber = 0, counter = 0;
     char nextChar;
-    //Finding how many chars are there from the user's input.
+    //Finding how many characters there are at the user's input.
     Length = answer.length();
     //Input Validation.
     while (counter < Length || counter == 0){
-        //Validatation. Only numbers are allowed.
+        //Allows only numbers.
         if (!isdigit(answer[counter])){
             cout << "Number cannot be negative." << endl;
             getline(cin, answer);
@@ -248,7 +244,7 @@ getline(cin, makeChoice);
                 counter++;
 }
 }
-//Convert the user's answer to integer datatype.
+//Converts the user's answer to int.
 for (int counter = 0; counter < Length; counter++){
 
     nextChar = answer[counter];
@@ -259,7 +255,7 @@ for (int counter = 0; counter < Length; counter++){
     return answerNumber;
     }
 
-    //Function that returns a value that checks whether the user's answer is right or wrong. 
+    //Function that checks whether the user's answer is correct or wrong. 
     int checkAnswer(int correctAnswer, int answerNumber){
        system("cls");
 
@@ -327,12 +323,11 @@ int genAdd(){
     system("cls");
     
     int num1, num2, correctAnswer;
-    //Create 2 random numbers ranging from 1 to 10.
     num1 = (rand() % 10) + 1;
     num2 = (rand() % 10) + 1;
     
     correctAnswer = num1 + num2;
-    //Display the problem.
+    //Display the chosen option
 
     cout << "************Welcome to addition*****************" << endl;
     cout << "             " << setw(2) << num1 << " + " << setw(2) << num2 << " = ?             " << endl;
@@ -357,7 +352,7 @@ int genSub(){
     return correctAnswer;
     }
 
-    //Function that generate multiplication problem.
+    //Function that generates multiplication.
     int genMulti(){
         system("cls");
         
@@ -375,7 +370,7 @@ int genSub(){
         return correctAnswer;
     }
 
-    //Function that generate division problem.
+    //Function that generates division.
     int genDiv(){
         system("cls");
         
@@ -385,7 +380,7 @@ int genSub(){
         num1 = (rand() % 10) + 1;
         num2 = ((rand() % 10) + 1) * num1;
 
-        //set the correct answer.x
+        //set sthe correct answer.x
 
         correctAnswer = num2 / num1;
         
