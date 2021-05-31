@@ -197,3 +197,102 @@ void getStats(ofstream &outputFile, ifstream &inputFile, string &name, int &corr
                                 }
                                 } while (!(makeChoice == "x" || makeChoice == "X")); 
                             }
+//Function that gets the user name.
+                        void getUserName(string &userName){
+                            //Clears screen to allow room to ask the user for his/her name.
+                            system("cls");
+
+                            cout << "Enter your name: " << endl;
+                            getline(cin, userName);
+                        }                      
+
+//Function that validates user's input for menu selection.
+void validateResponse(string &makeChoice){
+    //Simple. only 1, 2, 3, 4, 5, n, N is allowed.
+    while (!(makeChoice == "1" || makeChoice == "2" || 
+    makeChoice == "3" || makeChoice == "4" || makeChoice == "5" || 
+    makeChoice == "x" || makeChoice == "X")){
+        system("cls");
+
+
+cout << "***Please enter your choice. i.e(1-4)****" << endl;
+cout << "**************Game Menu**************\n" << endl;
+cout << "     [1] Addition                      " << endl;      
+cout << "     [2] Subtraction                   " << endl;
+cout << "     [3] Multiplication                " << endl;
+cout << "     [4] Division                      " << endl;
+cout << "     [5] Current statistic             " << endl;
+cout << "     [X] Save and return to home\n     " << endl;
+cout << "***************************************" << endl;
+
+getline(cin, makeChoice);
+}
+}
+//function that returns the users validated answers. 
+    int validateAnswer(string answer){
+    int Length, answerNumber = 0, counter = 0;
+    char nextChar;
+    //Finding how many chars are there from the user's input.
+    Length = answer.length();
+    //Input Validation.
+    while (counter < Length || counter == 0){
+        //Validatation. Only numbers are allowed.
+        if (!isdigit(answer[counter])){
+            cout << "Number cannot be negative." << endl;
+            getline(cin, answer);
+            Length = answer.length();
+
+            counter = 0;
+
+            }else{
+                counter++;
+}
+}
+//Convert the user's answer to integer datatype.
+for (int counter = 0; counter < Length; counter++){
+
+    nextChar = answer[counter];
+
+    answerNumber = answerNumber * 10 + (nextChar - '0');
+    }
+    //Return the answer as an integer value.
+    return answerNumber;
+    }
+
+    //Function that returns a value that checks whether the user's answer is right or wrong. 
+    int checkAnswer(int correctAnswer, int answerNumber){
+       system("cls");
+
+if (correctAnswer == answerNumber){
+
+    cout << "***************************************" << endl;
+    cout << "                Correct                " << endl;
+    cout << "***************************************" << endl;
+
+    return 1;
+    }
+    else{
+
+    cout << "***************************************" << endl;
+    cout << "                 Wrong                 " << endl;
+    cout << "***************************************" << endl;
+
+        return 0;
+}
+
+}    
+//Function that updates the user's statistics.
+void updateStats(int rightOrWrong, int &correct, int &wrong, double &wins){
+    //By using the rightOrWrong variable, update the statistic of the user.
+    if (rightOrWrong == 1){
+
+        correct += 1;
+        wins += 0.05;
+
+        }else{
+
+            wrong += 1;
+            wins -= 0.03;
+}
+}    
+//This is a function that displays the user's current status. 
