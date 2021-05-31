@@ -208,7 +208,7 @@ void getStats(ofstream &outputFile, ifstream &inputFile, string &name, int &corr
 
 //Function that validates user's input for menu selection.
 void validateResponse(string &makeChoice){
-    //Simple. only 1, 2, 3, 4, 5, n, N is allowed.
+    //Simple. only 1, 2, 3, 4, 5, x, X is allowed.
     while (!(makeChoice == "1" || makeChoice == "2" || 
     makeChoice == "3" || makeChoice == "4" || makeChoice == "5" || 
     makeChoice == "x" || makeChoice == "X")){
